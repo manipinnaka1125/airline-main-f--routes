@@ -22,7 +22,7 @@ function App() {
     <main>
       <Routes>
         
-      <Route path='/' element={<Home/>} exact/>
+      <Route path='/' element={<Registration/>} exact/>
         <Route path='/home' element={<Home/>} exact/>
         <Route path='/Book' element={<Book/>}exact/>
        <Route path='/Registration' element={<Registration/>}exact/>
