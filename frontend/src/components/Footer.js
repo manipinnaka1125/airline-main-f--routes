@@ -31,7 +31,7 @@ const Footer = () => {
           </a>
         </li>
       </ul>
-      <p>&copy; 2024 AIREASE AIRLINES | All Rights Reserved</p>
+      <p>&copy; 2024 MARCOS AIRLINES | All Rights Reserved</p>
     </footer>
   );
 };
