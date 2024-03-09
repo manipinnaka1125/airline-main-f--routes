@@ -11,6 +11,7 @@ import Login from './components/Login';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Book from './components/Book';
+import Logout from './components/Logout';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
   
         <Route path='/contact' element={<Contact/>} exact/>
         <Route path='/about' element={<About/>}exact/>
+        <Route path='/Logout'element={<Logout/>}exact/>
        
         
       </Routes>

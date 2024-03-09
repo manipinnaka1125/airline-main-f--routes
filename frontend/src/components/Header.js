@@ -40,6 +40,7 @@ const Header = () => {
       
               <Tab component={NavLink} to='/contact' label="CONTACT"/>
               <Tab component={NavLink} to='/about' label="About Us"/>
+              <Tab component={NavLink} to='/Logout'label="LOGOUT"/>
               
             </Tabs>
           </div>
