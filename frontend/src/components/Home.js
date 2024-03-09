@@ -1,24 +1,24 @@
-// Home.js
+
 
 import React, { useState } from 'react';
 import './Home.css';
-import Login from './Login'; // Import the Login component
+import Login from './Login'; 
 
 const Home = () => {
   const [showLogin, setShowLogin] = useState(false);
 
   const handleClickGetStarted = () => {
-    // Set showLogin to true when the button is clicked
+    
     setShowLogin(true);
   };
 
   return (
     <div className="home-container">
-      {/* Header and App Bar - Assuming you have these components */}
+      
 
-      {/* Main Content */}
+   
       <div className="main-content" >
-        {/* Conditionally render either the Home content or the Login component */}
+        
         {showLogin ? (
           <Login />
         ) : (

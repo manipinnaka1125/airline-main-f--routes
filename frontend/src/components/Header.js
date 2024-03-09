@@ -21,10 +21,6 @@ const Header = () => {
 </ImageList>
 
 
-
-
-        
-
           <div>
             <Tabs 
               sx={{ ml: 'auto' }} 
