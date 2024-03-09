@@ -14,7 +14,6 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
-
 import Select from '@mui/material/Select';
 
 function Copyright(props) {
@@ -33,33 +32,65 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 function Registration() {
+  const [formData, setFormData] = useState({
+    name: '',
+    lastName: '',
+    role: '',
+    email: '',
+    password: '',
+    allowExtraEmails: false,
+  });
+  const [formErrors, setFormErrors] = useState({});
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+
+  const handleChange = (event) => {
+    const { name, value, checked } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: name === 'allowExtraEmails' ? checked : value,
+    }));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const errors = validateForm(formData);
+    if (Object.keys(errors).length === 0) {
+      axios
+        .post('http://localhost:8081/insert', formData)
+        .then((response) => {
+          console.log(response.data);
+          setRegistrationSuccess(true);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    } else {
+      setFormErrors(errors);
+    }
+  };
 
-    axios.post('http://localhost:8081/insert', {
-      name: data.get('name'),
-      role: data.get('role'),
-      email: data.get('email'),
-      password: data.get('password'),
-    })
-      .then((response) => {
-        console.log(response.data);
-        setRegistrationSuccess(true);
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.error('Server responded with an error status:', error.response.status);
-          console.error('Server response data:', error.response.data);
-        } else if (error.request) {
-          console.error('No response received from the server');
-        } else {
-          console.error('Error during request setup:', error.message);
-        }
-        console.error('Error config:', error.config);
-      });
+  const validateForm = (data) => {
+    const errors = {};
+    if (!data.name.trim()) {
+      errors.name = 'Name is required';
+    }
+    if (!data.lastName.trim()) {
+      errors.lastName = 'Last Name is required';
+    }
+    if (!data.role) {
+      errors.role = 'Role is required';
+    }
+    if (!data.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+      errors.email = 'Email is invalid';
+    }
+    if (!data.password.trim()) {
+      errors.password = 'Password is required';
+    } else if (data.password.length < 6) {
+      errors.password = 'Password must be at least 6 characters';
+    }
+    return errors;
   };
 
   return (
@@ -68,12 +99,11 @@ function Registration() {
         <CssBaseline />
         <Box
           sx={{
-           
+            marginTop: '100px',
+            marginBottom: '200px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            marginTop:'100px',
-            marginBottom:'200px',
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -82,7 +112,7 @@ function Registration() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          
+
           {registrationSuccess && (
             <Typography variant="body2" color="text.secondary" align="center">
               You have been registered successfully!
@@ -100,6 +130,24 @@ function Registration() {
                   id="name"
                   label="Name"
                   autoFocus
+                  value={formData.name}
+                  onChange={handleChange}
+                  error={!!formErrors.name}
+                  helperText={formErrors.name}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="family-name"
+                  name="lastName"
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  error={!!formErrors.lastName}
+                  helperText={formErrors.lastName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -107,12 +155,14 @@ function Registration() {
                   id="role"
                   name="role"
                   label="Role"
-                  defaultValue={0}
+                  value={formData.role}
+                  onChange={handleChange}
+                  error={!!formErrors.role}
+                  fullWidth
                 >
                   <MenuItem value="">
                     <em></em>
                   </MenuItem>
-                  <MenuItem value={0}>Select User</MenuItem>
                   <MenuItem value={1}>Flight crew</MenuItem>
                   <MenuItem value={2}>Traveller</MenuItem>
                 </Select>
@@ -125,6 +175,10 @@ function Registration() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  error={!!formErrors.email}
+                  helperText={formErrors.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -136,11 +190,22 @@ function Registration() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  error={!!formErrors.password}
+                  helperText={formErrors.password}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  control={
+                    <Checkbox
+                      checked={formData.allowExtraEmails}
+                      onChange={handleChange}
+                      name="allowExtraEmails"
+                      color="primary"
+                    />
+                  }
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
@@ -150,6 +215,7 @@ function Registration() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={Object.keys(formErrors).length !== 0}
             >
               Sign Up
             </Button>
@@ -167,4 +233,5 @@ function Registration() {
     </ThemeProvider>
   );
 }
+
 export default Registration;

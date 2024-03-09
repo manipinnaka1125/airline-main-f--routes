@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Book from './components/Book';
 import Logout from './components/Logout';
+import Admin from './components/Admin';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
   
         <Route path='/contact' element={<Contact/>} exact/>
         <Route path='/about' element={<About/>}exact/>
+        <Route path='/Admin'element={<Admin/>}exact/>
         <Route path='/Logout'element={<Logout/>}exact/>
        
         

@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient } = require('mongodb');
+const { MongoClient,ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
@@ -48,7 +48,7 @@ app.post('/insert', async (req, res) => {
       from: process.env.EMAIL_USER,
       to: req.body.email,
       subject: 'Registration Confirmation',
-      text: 'Dear CUSTOMER Welcome to AIREASE Airlines! 🌟 You have been successfully registered. Get ready for a journey filled with comfort and luxury.At MARCOS Airlines, we are dedicated to making your travels seamless and enjoyable. From our top-notch aircraft to our friendly staff, every moment with us is designed for your satisfaction. Thank you for choosing AIREASE Airlines.  unforgettable journeys! Safe travels,The MARCOS Airlines Team ✈️',
+      text: 'Dear CUSTOMER Welcome to Marcos Airlines! 🌟 You have been successfully registered. Get ready for a journey filled with comfort and luxury.At MARCOS Airlines, we are dedicated to making your travels seamless and enjoyable. From our top-notch aircraft to our friendly staff, every moment with us is designed for your satisfaction. Thank you for choosing AIREASE Airlines.  unforgettable journeys! Safe travels,The MARCOS Airlines Team ✈️',
     };
     
     try {
@@ -89,7 +89,28 @@ app.get('/show', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+app.get('/retrive', async (req, res) => {
+  const result =await  col.find().toArray()
+  console.log(result)
+  res.send(result)
+})
+app.put('/users/:id', async (req,res)=>{ 
+  const {id}= req.params 
+  const {name, lastname, role, email, password}=req.body 
+  const result= await col.updateOne({_id: new ObjectId(id)}, {$set:{name,lastname, role, email, password} }) 
+  res.send('updated') 
+})
 
+app.delete('/users/:id',async (req,res)=>{
+  const {id}=req.params
+  const result= await col.deleteOne({_id:new ObjectId(id)})
+  res.json({message:'deleted sucessfully'})
+})
+app.post('/register',(req,res)=>{
+  col.insertOne(req.body)
+  console.log(req.body)
+  res.send("data inserted successfully")
+})
 const PORT = 8081;
 app.listen(PORT, () => {
   console.log(`Server Running on port ${PORT}`);
