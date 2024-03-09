@@ -48,7 +48,7 @@ app.post('/insert', async (req, res) => {
       from: process.env.EMAIL_USER,
       to: req.body.email,
       subject: 'Registration Confirmation',
-      text: 'You have been registered to MARCOS Airlines.',
+      text: 'Dear CUSTOMER Welcome to AIREASE Airlines! 🌟 You have been successfully registered. Get ready for a journey filled with comfort and luxury.At MARCOS Airlines, we are dedicated to making your travels seamless and enjoyable. From our top-notch aircraft to our friendly staff, every moment with us is designed for your satisfaction. Thank you for choosing AIREASE Airlines.  unforgettable journeys! Safe travels,The MARCOS Airlines Team ✈️',
     };
     
     try {
