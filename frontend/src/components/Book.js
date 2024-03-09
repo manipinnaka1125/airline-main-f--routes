@@ -16,7 +16,7 @@ const Book = () => {
   return (
     <div className="booking-container">
       <div className="booking-form">
-        <h1>Book Your Flight</h1>
+        <h1>Book Benchod</h1>
         <form id="bookingForm">
           <div className="row">
             <div className="col-md-6">
