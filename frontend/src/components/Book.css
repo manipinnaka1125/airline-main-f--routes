@@ -1,80 +1,54 @@
+.booking-container-landscape {
+  display: landscape;
+  justify-content: landscape;
+  align-items: landsacpe;
+  width: 100vw; /* Full width of the viewport */
+  height: 50vh; /* Half of the height of the viewport */
+}
 .booking-form {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  max-width: 800px; /* Adjust the max-width as needed for landscape view */
+  background-color: rgba(244, 244, 244, 0.8); /* Transparent background */
   padding: 30px;
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  margin-top: 20px;
-  color: #000;
+  border-radius: 100px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
 }
 
 .form-label {
-  display: block;
-  margin-bottom: 10px;
-  color: #000;
   font-weight: bold;
 }
 
+.radio-group {
+  display: flex;
+  align-items: center;
+}
+
+.radio-group input[type="radio"] {
+  margin-right: 10px;
+}
+
 .form-control {
-  width: calc(50% - 10px); /* Adjust width to fit the container */
-  height: 40px;
-  padding: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  margin-bottom: 20px;
-  background-color: rgba(255, 255, 255, 0.3);
-  color: #000;
 }
 
 .select-arrow {
   position: absolute;
   right: 10px;
-  bottom: 15px;
-  width: 32px;
-  line-height: 32px;
-  height: 32px;
-  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
   pointer-events: none;
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 14px;
-}
-
-.select-arrow:after {
-  content: '▼';
-  display: block;
-  font-size: 20px;
-}
-
-.form-btn {
-  margin-top: 20px;
 }
 
 .submit-btn {
-  background-color: #f23e3e;
+  background-color: #007bff;
   color: #fff;
+  padding: 10px 20px;
   border: none;
-  padding: 15px 20px; /* Adjust padding values */
-  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: inline-block; /* Ensures that the button width adjusts to the content */
 }
 
 .submit-btn:hover {
-  background-color: #d63030;
-}
-.radio-group {
-  display: flex;
-  flex-direction: column; /* Display items in a column (vertically) */
-}
-
-.radio-group input {
-  margin-bottom: 5px; /* Add some space between radio buttons */
+  background-color: #0056b3;
 }

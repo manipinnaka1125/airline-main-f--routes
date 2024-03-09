@@ -1,5 +1,3 @@
-// Book.js
-
 import React, { useState } from 'react';
 import './Book.css';
 import ShowFlights from './ShowFlights';
@@ -14,9 +12,9 @@ const Book = () => {
   };
 
   return (
-    <div className="booking-container">
+    <div className="booking-container-landscape" style={{ height: '70vh' }}>
       <div className="booking-form">
-        <h1>Book you Flight</h1>
+        <h1>Book your Flight</h1>
         <form id="bookingForm">
           <div className="row">
             <div className="col-md-6">
@@ -65,17 +63,20 @@ const Book = () => {
             <div className="col-md-6">
               <div className="form-group">
                 <span className="form-label">Select Country</span>
-                {/* Add a dropdown for countries (replace placeholder options) */}
                 <select className="form-control" defaultValue="">
                   <option value="" disabled>Select a country</option>
                   <option value="country1">Country 1</option>
                   <option value="country2">Country 2</option>
                   <option value="country3">Country 3</option>
+                  {/* Add more countries here */}
+                  <option value="country4">Country 4</option>
+                  <option value="country5">Country 5</option>
                 </select>
                 <span className="select-arrow"></span>
               </div>
             </div>
           </div>
+
           {/* Flying From and To sections */}
           <div className="row">
             <div className="col-md-6">

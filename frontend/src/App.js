@@ -1,9 +1,7 @@
 import './App.css';
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
-
 import Contact from './components/Contact';
 import About from './components/About';
 import Registration from './components/Registration';
@@ -13,38 +11,45 @@ import Header from './components/Header';
 import Book from './components/Book';
 import Logout from './components/Logout';
 import Admin from './components/Admin';
-
+import LoadingAnimation from './components/Loading';
 
 function App() {
-  return <React.Fragment>
-    <header>
-   <Header/>
-    </header>
+  const [isLoading, setIsLoading] = useState(true);
 
-    <main>
-      <Routes>
-        
-      <Route path='/' element={<Registration/>} exact/>
-        <Route path='/home' element={<Home/>} exact/>
-        <Route path='/Book' element={<Book/>}exact/>
-       <Route path='/Registration' element={<Registration/>}exact/>
-     
-        <Route path='/LOGIN' element={<Login/>} exact/>
-     
-  
-        <Route path='/contact' element={<Contact/>} exact/>
-        <Route path='/about' element={<About/>}exact/>
-        <Route path='/Admin'element={<Admin/>}exact/>
-        <Route path='/Logout'element={<Logout/>}exact/>
-       
-        
-      </Routes>
-    </main>
-    <footer>
-<Footer/>
-    </footer>
+  useEffect(() => {
+    // Simulate loading time
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 4000); // Simulate a 2-second delay for loading
+  }, []);
 
-  </React.Fragment>
+  return (
+    <React.Fragment>
+      <header>
+        <Header />
+      </header>
+      <main>
+        {isLoading ? (
+          <LoadingAnimation />
+        ) : (
+          <Routes>
+            <Route path='/' element={<Registration />} exact />
+            <Route path='/home' element={<Home />} exact />
+            <Route path='/book' element={<Book />} exact />
+            <Route path='/registration' element={<Registration />} exact />
+            <Route path='/login' element={<Login />} exact />
+            <Route path='/contact' element={<Contact />} exact />
+            <Route path='/about' element={<About />} exact />
+            <Route path='/admin' element={<Admin />} exact />
+            <Route path='/logout' element={<Logout />} exact />
+          </Routes>
+        )}
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </React.Fragment>
+  );
 }
 
 export default App;
