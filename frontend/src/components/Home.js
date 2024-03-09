@@ -39,9 +39,8 @@ const Home = () => {
       <div style={{ marginTop: '-190px' }}>
       <div align="center" ><iframe
   title="AirEase Airlines Video"
-  width="800"
-  height="500"
-
+  width="1500"
+  height="700"
   src="https://www.youtube.com/embed/pXznPl1QXdI?si=sTzTW7qANMZHSr1d"
 ></iframe></div>
 </div>

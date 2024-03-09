@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AppBar, Toolbar, Tab, Tabs, ImageList, ImageListItem } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import aero1 from '../images/aero1.png';
+import './Header.css'; // Import your CSS file for styling
 
 const Header = () => {
   const [value, setValue] = useState(0);
@@ -16,7 +17,7 @@ const Header = () => {
         <Toolbar>
           <ImageList sx={{ width: 150, height: 80, marginRight: '10px' }}>
             <ImageListItem sx={{ padding: 0 }}>
-              <img src={aero1} alt="kl logo" style={{ width: '%', height: '150%', objectFit: 'cover' }} />
+              <img src={aero1} alt="kl logo" className="airplane-animation" style={{ width: '%', height: '150%', objectFit: 'cover' }} />
             </ImageListItem>
           </ImageList>
 
@@ -35,7 +36,7 @@ const Header = () => {
               <Tab component={NavLink} to='/contact' label="CONTACT"/>
               <Tab component={NavLink} to='/about' label="About Us"/>
               <Tab component={NavLink} to='/Admin' label="ADMIN"/>
-              <Tab component={NavLink} to='/Logout'label="LOGOUT"/>
+              <Tab component={NavLink} to='/Logout' label="LOGOUT"/>
             </Tabs>
           </div>
         </Toolbar>

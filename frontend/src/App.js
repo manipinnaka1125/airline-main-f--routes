@@ -33,7 +33,7 @@ function App() {
           <LoadingAnimation />
         ) : (
           <Routes>
-            <Route path='/' element={<Registration />} exact />
+            <Route path='/' element={<Home />} exact />
             <Route path='/home' element={<Home />} exact />
             <Route path='/book' element={<Book />} exact />
             <Route path='/registration' element={<Registration />} exact />

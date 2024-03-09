@@ -1,0 +1,13 @@
+@keyframes moveAcrossHeader {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+  
+  .airplane-animation {
+    animation: moveAcrossHeader 10s linear infinite;
+  }
+  
