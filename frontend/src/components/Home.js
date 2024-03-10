@@ -23,7 +23,7 @@ const Home = () => {
           <Login />
         ) : (
           <div className="content-overlay">
-            <h1>Welcome to AirEase Airlines</h1>
+            <h1>Welcome to MARCOS Airlines</h1>
             <p>Book your flights with ease and comfort</p>
             <p>"Experience seamless travel with our user-friendly airline booking platform</p>
             <p>offering competitive prices, diverse flight options, and hassle-free reservations for your next journey."</p>
