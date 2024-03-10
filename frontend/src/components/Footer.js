@@ -21,7 +21,7 @@ const Footer = () => {
           </a>
         </li>
         <li className="menu__item">
-          <a className="menu__link" href="/team">
+          <a className="menu__link" href="/Team">
             Team
           </a>
         </li>

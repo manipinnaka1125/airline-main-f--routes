@@ -12,6 +12,7 @@ import Book from './components/Book';
 import Logout from './components/Logout';
 import Admin from './components/Admin';
 import LoadingAnimation from './components/Loading';
+import Team from './components/Team'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -42,6 +43,7 @@ function App() {
             <Route path='/about' element={<About />} exact />
             <Route path='/admin' element={<Admin />} exact />
             <Route path='/logout' element={<Logout />} exact />
+            <Route path='/Team' element={<Team/>} exact />
           </Routes>
         )}
       </main>
