@@ -10,17 +10,17 @@ app.use(express.json());
 app.use(cors());
 
 
-const Client = new MongoClient('mongodb+srv://admin1:admin1@cluster0.wyowjiq.mongodb.net/?retryWrites=true&w=majority');
+const Client = new MongoClient('');
 Client.connect();
-const db = Client.db('skill');
-const col = db.collection('user');
+const db = Client.db('');
+const col = db.collection('');
 
 
 
 
 // Nodemailer configuration
 const transporter = nodemailer.createTransport({
-  service: 'pinnakamaniswaroop@gmail.com', // Update with your email service provider
+  service: '', // Update with your email service provider
   port: 587,
   secure: false,
   auth: {
