@@ -23,12 +23,13 @@ const Contact = () => {
       maxWidth: '400px',
       margin: 'auto',
       padding: '20px',
-      backgroundColor: '#f4f4f4',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)', // Transparent black background
+      color: '#000000', // Black text color
       borderRadius: '8px',
       boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
       marginTop:'100px',
       marginBottom:'100px',
-    },
+    },  
     contactForm: {
       display: 'flex',
       flexDirection: 'column',

@@ -1,54 +1,61 @@
-.booking-container-landscape {
-  display: landscape;
-  justify-content: landscape;
-  align-items: landsacpe;
-  width: 100vw; /* Full width of the viewport */
-  height: 50vh; /* Half of the height of the viewport */
-}
-.booking-form {
-  background-color: rgba(244, 244, 244, 0.8); /* Transparent background */
-  padding: 30px;
-  border-radius: 100px;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
-}
+/* Search.css */
 
-.form-label {
-  font-weight: bold;
-}
-
-.radio-group {
+/* Styles for the card container */
+.card-container {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  margin-top: 4rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
 
-.radio-group input[type="radio"] {
-  margin-right: 10px;
+/* Styles for the left column */
+.left-column {
+  width: 30%;
 }
 
+/* Styles for the card within the left column */
+.card-left {
+  padding: 1rem;
+}
+
+/* Styles for the buttons group */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Styles for the inputs */
 .form-control {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  margin-top: 0.5rem;
 }
 
-.select-arrow {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
+/* Styles for the passenger count section */
+.passenger-count {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
 }
 
-.submit-btn {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+/* Styles for the search button */
+.search-btn {
+  width: 100%;
+  margin-top: 1rem;
 }
 
-.submit-btn:hover {
-  background-color: #0056b3;
+/* Styles for the right column */
+.right-column {
+  width: 68%;
+}
+
+/* Styles for the refine flight search section */
+.refine-search {
+  margin-top: 1rem;
+}
+
+/* Styles for the InputRange component */
+.input-range-container {
+  margin-top: 1rem;
 }

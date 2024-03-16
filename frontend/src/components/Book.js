@@ -1,176 +1,259 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import Result from "./Result";
+import flightData from "../data";
+import InputRange from 'react-input-range';
+import 'react-input-range/lib/css/index.css';
 import './Book.css';
-import ShowFlights from './ShowFlights';
 
-const Book = () => {
-  const [showFlights, setShowFlights] = useState(false);
-  const [tripType, setTripType] = useState('roundtrip'); // 'roundtrip' or 'oneway'
-  const [travelType, setTravelType] = useState('domestic'); // 'domestic' or 'international'
 
-  const handleShowFlights = () => {
-    setShowFlights(true);
+function Search() {
+  const [btnType, setbtnType] = useState("oneWay");
+  const [passengerCount, setPassengerCount] = useState(1);
+  const [priceRange, setPriceRange] = useState(10000);
+
+  const [bookReturn, setBookReturn] = useState(false);
+  const [originCity, setOriginCity] = useState("");
+  const [destinationCity, setDestinationCity] = useState("");
+  const [departureDate, setDepartureDate] = useState("");
+  const [returnDate, setReturnDate] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+
+  const [isSearchClicked, setIsSearchClicked] = useState(false);
+  const [returnFilterData, setReturnFilterData] = useState([]);
+
+  const bookType = [
+    {
+      name: "One way",
+      id: "oneWay",
+    },
+    {
+      name: "Return",
+      id: "return",
+    },
+  ];
+
+  const handleBookType = (id) => {
+    setbtnType(id);
+    if (id === "oneWay") {
+      setIsSearchClicked(false);
+      setBookReturn(false);
+      setReturnDate("");
+    } else if (id === "return") {
+      setIsSearchClicked(false);
+      setBookReturn(true);
+    }
+  };
+
+  const handleCount = (key) => {
+    if (key === "add") {
+      if (passengerCount >= 5) {
+        return;
+      }
+      setPassengerCount(passengerCount + 1);
+    } else if (key === "less") {
+      if (passengerCount === 1) {
+        return;
+      }
+      setPassengerCount(passengerCount - 1);
+    }
+  };
+
+  const handleFocus = (e) => {
+    e.currentTarget.type = "date";
+  };
+  const handleBlur = (e) => {
+    e.currentTarget.type = "text";
+  };
+
+  useEffect(() => {
+    handleFilter();
+    returnFilter();
+  }, [priceRange]);
+
+  const handleFilter = () => {
+    let result = flightData.filter((data) => {
+      if (
+        data &&
+        data.from.city &&
+        data.to.city &&
+        data.from.city
+          .toLowerCase()
+          .includes(originCity.trim().toLowerCase()) &&
+        data.to.city
+          .toLowerCase()
+          .includes(destinationCity.trim().toLowerCase()) &&
+        data.depart === departureDate &&
+        data.price <= priceRange
+      ) {
+        return data;
+      }
+    });
+    setFilteredData(result);
+  };
+  const returnFilter = () => {
+    let result = flightData.filter((data) => {
+      if (
+        data &&
+        data.from &&
+        data.from.city &&
+        data.from.city
+          .toLowerCase()
+          .includes(destinationCity.trim().toLowerCase()) &&
+        data.to &&
+        data.to.city &&
+        data.to.city.toLowerCase().includes(originCity.trim().toLowerCase()) &&
+        data.depart === returnDate &&
+        data.price <= priceRange
+      ) {
+        return data;
+      }
+    });
+    setReturnFilterData(result);
+  };
+
+  const handleSearch = () => {
+    if (bookReturn && !returnDate) {
+      alert("Return date can't be empty!");
+    } else if (!originCity) {
+      alert("Origin city can't be empty!");
+    } else if (!destinationCity) {
+      alert("Destination city can't be empty!");
+    } else if (!departureDate) {
+      alert("Departure date can't be empty!");
+    }
+    if (originCity && destinationCity && departureDate) {
+      setIsSearchClicked(true);
+      handleFilter();
+      if (bookReturn && returnDate) {
+        returnFilter();
+      }
+    }
   };
 
   return (
-    <div className="booking-container-landscape" style={{ height: '70vh' }}>
-      <div className="booking-form">
-        <h1>Book your Flight</h1>
-        <form id="bookingForm">
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <span className="form-label">Trip Type</span>
-                <div className="radio-group">
+    <div>
+      <div className="row mt-4 ml-5 mr-5">
+        <div className="col-md-4">
+          <div className="card">
+            <div className="card-body">
+              <div className="card">
+                <div className="card-body">
+                  <div className="btn-group d-flex justify-content-center">
+                    {bookType.map((type) => {
+                      return (
+                        <button
+                          type="button"
+                          className={`btn ${
+                            btnType === type.id ? "active_btn" : ""
+                          }`}
+                          key={type.id}
+                          onClick={() => handleBookType(type.id)}
+                        >
+                          {type.name}
+                        </button>
+                      );
+                    })}
+                  </div>
                   <input
-                    type="radio"
-                    id="roundtrip"
-                    name="tripType"
-                    value="roundtrip"
-                    checked={tripType === 'roundtrip'}
-                    onChange={() => setTripType('roundtrip')}
+                    type="text"
+                    placeholder="Enter origin city"
+                    className="form-control mt-4"
+                    onChange={(e) => setOriginCity(e.target.value)}
                   />
-                  <label htmlFor="roundtrip">Roundtrip</label>
                   <input
-                    type="radio"
-                    id="oneway"
-                    name="tripType"
-                    value="oneway"
-                    checked={tripType === 'oneway'}
-                    onChange={() => setTripType('oneway')}
+                    type="text"
+                    placeholder="Enter destination city"
+                    className="form-control mt-2"
+                    onChange={(e) => setDestinationCity(e.target.value)}
                   />
-                  <label htmlFor="oneway">One Way</label>
+                  <input
+                    type="text"
+                    placeholder="Enter departure date"
+                    className="form-control mt-2"
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    onChange={(e) => setDepartureDate(e.target.value)}
+                  />
+                  {btnType === "return" ? (
+                    <input
+                      type="text"
+                      placeholder="Enter return date"
+                      className="form-control mt-2"
+                      onFocus={handleFocus}
+                      onBlur={handleBlur}
+                      onChange={(e) => setReturnDate(e.target.value)}
+                    />
+                  ) : null}
+                  <div
+                    className="d-flex justify-content-center mt-2"
+                    style={{ alignItems: "center" }}
+                  >
+                    <button
+                      type="button"
+                      className="btn btn-secondary mr-2"
+                      onClick={() => handleCount("less")}
+                    >
+                      -
+                    </button>
+                    <div className="text-muted">
+                      {passengerCount} passengers
+                    </div>
+                    <button
+                      type="button"
+                      className="btn btn-secondary ml-2"
+                      onClick={() => handleCount("add")}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      className="btn search_btn"
+                      onClick={handleSearch}
+                    >
+                      <b>Search</b>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="card mt-4">
+                <div className="card-body">
+                  <div
+                    style={{
+                      marginBottom: ".7rem",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Refine flight search
+                  </div>
+                  <div className="mt-4 mb-4">
+                    <InputRange
+                      minValue={0}
+                      step={100}
+                      maxValue={10000}
+                      formatLabel={(price) => `${price}`}
+                      value={priceRange}
+                      onChange={(price) => setPriceRange(price)}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="form-group">
-                <span className="form-label">Travel Type</span>
-                <select
-                  className="form-control"
-                  value={travelType}
-                  onChange={(e) => setTravelType(e.target.value)}
-                >
-                  <option value="domestic">Domestic</option>
-                  <option value="international">International</option>
-                </select>
-                <span className="select-arrow"></span>
-              </div>
-            </div>
           </div>
-
-          {/* Country Selection */}
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <span className="form-label">Select Country</span>
-                <select className="form-control" defaultValue="">
-                  <option value="" disabled>Select a country</option>
-                  <option value="country1">Country 1</option>
-                  <option value="country2">Country 2</option>
-                  <option value="country3">Country 3</option>
-                  {/* Add more countries here */}
-                  <option value="country4">Country 4</option>
-                  <option value="country5">Country 5</option>
-                </select>
-                <span className="select-arrow"></span>
-              </div>
-            </div>
-          </div>
-
-          {/* Flying From and To sections */}
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <span className="form-label">Flying from</span>
-                <select className="form-control" defaultValue="">
-                  <option value="" disabled>Select a city</option>
-                  <option value="city1">City 1</option>
-                  <option value="city2">City 2</option>
-                  <option value="city3">City 3</option>
-                </select>
-                <span className="select-arrow"></span>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="form-group">
-                <span className="form-label">Flying to</span>
-                <select className="form-control" defaultValue="">
-                  <option value="" disabled>Select a city</option>
-                  <option value="city1">City 1</option>
-                  <option value="city2">City 2</option>
-                  <option value="city3">City 3</option>
-                </select>
-                <span className="select-arrow"></span>
-              </div>
-            </div>
-          </div>
-
-          {/* Departing and Returning sections */}
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <span className="form-label">Departing</span>
-                <input className="form-control" type="date" required />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="form-group">
-                <span className="form-label">Returning</span>
-                <input className="form-control" type="date" required />
-              </div>
-            </div>
-          </div>
-
-          {/* Adults, Children, and Travel class sections */}
-          <div className="row">
-            <div className="col-md-2">
-              <div className="form-group">
-                <span className="form-label">Adults (18+)</span>
-                <select className="form-control">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                </select>
-                <span className="select-arrow"></span>
-              </div>
-            </div>
-            <div className="col-md-2">
-              <div className="form-group">
-                <span className="form-label">Children (0-17)</span>
-                <select className="form-control">
-                  <option>0</option>
-                  <option>1</option>
-                  <option>2</option>
-                </select>
-                <span className="select-arrow"></span>
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <span className="form-label">Travel class</span>
-                <select className="form-control">
-                  <option>Economy class</option>
-                  <option>Business class</option>
-                  <option>First class</option>
-                </select>
-                <span className="select-arrow"></span>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="form-btn">
-                <button className="submit-btn" onClick={handleShowFlights}>Show flights</button>
-              </div>
-            </div>
-          </div>
-
-          {showFlights && <ShowFlights />}
-        </form>
+        </div>
+        <div className="col-md-8">
+          <Result
+            filteredData={filteredData}
+            bookReturn={bookReturn}
+            isSearchClicked={isSearchClicked}
+            returnFilterData={returnFilterData}
+            passengerCount={passengerCount}
+          />
+        </div>
       </div>
     </div>
   );
-};
+}
 
-export default Book;
+export default Search;

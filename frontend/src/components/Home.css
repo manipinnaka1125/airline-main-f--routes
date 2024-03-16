@@ -36,7 +36,7 @@ body{
   
   .content-overlay {
     z-index: 1;
-    color: #ffffff;
+    color: #000000; /* Change to black */
     position: relative;
     top: -100px; /* Adjust the value as needed to move the text upward */
   }
