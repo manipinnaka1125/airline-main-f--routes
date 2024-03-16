@@ -1,5 +1,9 @@
 import React from 'react';
 //import lokesh from './images/Lokesh.jpg'
+
+import swaroop from '../images/swaroop.jpg';
+import rampa from '../images/rampa.jpg';
+import lokesh from '../images/lokesh.jpg';
 const styles = {
   body: {
     fontFamily: 'Arial, sans-serif',
@@ -33,7 +37,7 @@ function TeamMember({ imageSrc, altText, role, name, experience, skills }) {
       <h2>{role}</h2>
       <p>Name: {name}</p>
       <p>Role: {role}</p>
-      <p>Experience: {experience} years</p>
+      
       <p>Skills: {skills}</p>
     </div>
   );
@@ -42,9 +46,9 @@ function TeamMember({ imageSrc, altText, role, name, experience, skills }) {
 function App() {
   return (
     <div style={styles.container}>
-      <h1>Our JavaScript Team</h1>
+      <h1>Our Airline Reservation Team</h1>
       <TeamMember
-        imageSrc="lokesh.jpg"
+        imageSrc={lokesh}
         altText="Lokesh Vemareddy"
         role="Frontend Developer"
         name="Lokesh Vemareddy"
@@ -52,15 +56,15 @@ function App() {
         skills="HTML, CSS, JavaScript, React"
       />
       <TeamMember
-        imageSrc="https://via.placeholder.com/100"
+        imageSrc={rampa}
         altText="Ram Prasad Atluri"
         role="MiddleWare Developer"
         name="Ram Prasad Atluri"
         Redg No="2200031828"
-        skills="Express, Redis, RabbitMQ"
+        skills="Express, Mongodb,react"
       />
       <TeamMember
-        imageSrc="https://via.placeholder.com/100"
+        imageSrc={swaroop}
         altText="Pinnaka ManiSwaroop"
         role="BackEnd Developer"
         name="Pinnaka ManiSwaroop"
