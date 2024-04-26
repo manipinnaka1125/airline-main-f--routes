@@ -16,19 +16,6 @@ import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
 import Select from '@mui/material/Select';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const defaultTheme = createTheme();
 
 function Registration() {
@@ -104,6 +91,10 @@ function Registration() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)',
+            borderRadius: '10px',
+            padding: '20px',
+            background: 'linear-gradient(to top left, #f7c4f3, #fceabb)',
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -214,11 +205,18 @@ function Registration() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                mt: 3,
+                mb: 2,
+                backgroundColor: '#00ccff',
+                color: '#fff',
+                '&:hover': {
+                  backgroundColor: '#0099cc',
+                },
+              }}
               disabled={Object.keys(formErrors).length !== 0}
             >
               Sign Up
-              
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
@@ -229,7 +227,14 @@ function Registration() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Typography variant="body2" color="text.secondary" align="center">
+          {'Copyright © '}
+          <Link color="inherit" href="https://mui.com/">
+            Your Website
+          </Link>{' '}
+          {new Date().getFullYear()}
+          {'.'}
+        </Typography>
       </Container>
     </ThemeProvider>
   );

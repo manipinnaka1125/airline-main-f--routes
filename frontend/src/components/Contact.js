@@ -39,7 +39,7 @@ const Contact = () => {
       maxWidth: '400px',
       margin: 'auto',
       padding: '20px',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)', // Transparent black background
+      backgroundImage: 'linear-gradient(to top left, #f7c4f3, #fceabb)',
       color: '#000000', // Black text color
       borderRadius: '8px',
       boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
@@ -48,10 +48,12 @@ const Contact = () => {
     },
     contactForm: {
       display: 'flex',
+      
       flexDirection: 'column',
     },
     label: {
       marginBottom: '8px',
+      color: 'black', // White text color
     },
     input: {
       padding: '8px',
@@ -78,7 +80,7 @@ const Contact = () => {
 
   // Render "Thank You" message conditionally when submitted is true
   const thankYouMessage = submitted && (
-    <div style={{ textAlign: 'center',  color:'white'}}>
+    <div style={{ textAlign: 'center', color: '#ffffff' }}>
       <h1>Thank You!</h1>
       <p>We have received your message.</p>
     </div>
@@ -129,7 +131,7 @@ const Contact = () => {
         </button>
        
         {thankYouMessage}
-        <center><p >Email for more info: pinnakamaniswaroop@gmail.com</p></center>
+        <center><p>Email for more info: pinnakamaniswaroop@gmail.com</p></center>
       </form>
     </div>
   );

@@ -1,32 +1,56 @@
 /* Search.css */
 
 /* Styles for the card container */
-/* Search.css */
-
-/* Styles for the card container */
-.HEL{
-  color: rgb(255, 255, 255);
+.HEL {
+color: white;
 }
+
 .card-container {
   display: flex;
-  justify-content: center; /* Center the card horizontally */
-  align-items: center; /* Center the card vertically */
-  height: 100vh; /* Set card container height to fill the viewport */
-  background-color: #ffffff; /* Light gray background color */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #ff3366, #00ccff,green); /* Gradient background */
 }
 
 /* Styles for the card */
 .card {
-  width: 80%; /* Set card width */
-  max-width: 600px; /* Limit maximum card width */
-  padding: 1rem;
-  box-shadow: 0 10px 8px rgba(255, 255, 255, 0.1); /* Add box shadow for depth */
-  border-radius: 8px; /* Add border radius for rounded corners */
-  background-color:#DFCFBE; /* White background color */
-  margin: 0 auto; 
-  margin-bottom: 20px;/* Center the card horizontally */
+  width: 80%;
+  max-width: 600px;
+  padding: 2rem;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  background: linear-gradient(to top left, #f7c4f3, #fceabb); /* Gradient background */
+  margin: 0 auto;
+  margin-bottom: 40px;
+  overflow: hidden; /* Hide overflowing content */
+  position: relative; /* Position relative for absolute positioning */
 }
 
+.card:before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  animation: animateCircle 8s linear infinite;
+}
+
+@keyframes animateCircle {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0);
+  }
+}
 
 /* Styles for the buttons group */
 .btn-group {
@@ -34,45 +58,81 @@
   justify-content: center;
   margin-bottom: 2rem;
   border-radius: 8px;
- 
-  background-color: transparent; /* White background color */
+  background-color: transparent;
+  padding: 1rem;
+  backdrop-filter: blur(10px); /* Apply blur effect */
+}
+
+.btn-group button {
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #ff3366;
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-group button:hover {
+  background-color: #c90052; /* Darken the background on hover */
 }
 
 /* Styles for the inputs */
 .form-control {
-  width: 100%;
-  margin-top: 0.5rem;
+  width: calc(100% - 2rem); /* Adjust width to accommodate padding */
+  margin: 1rem auto; /* Center the form horizontally */
   border-radius: 8px;
-  color:rgb(0, 0, 0);
+  color: #000000;
   margin-bottom: 20px;
-  background-color: #fff4f4; /* White background color */
+  background: linear-gradient(to top left, #ffffff, white); /* Gradient background */
+  padding: 1rem; /* Add padding for better spacing */
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Add subtle shadow */
 }
+
 
 /* Styles for the passenger count section */
 .passenger-count {
   display: flex;
   justify-content: center;
-  margin-top: 0.5rem;
-  background-color: #ffffff; /* White background color */
+  margin-top: 1rem;
+}
+
+.passenger-count input {
+  width: 50px;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 /* Styles for the search button */
 .search-btn {
   width: 100%;
   margin-top: 1rem;
-  background-color: #ffffff; /* Blue background color */
-  color: #ffffff; /* White text color */
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #00ccff;
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #0099cc; /* Darken the background on hover */
 }
 
 /* Styles for the refine flight search section */
 .refine-search {
   margin-top: 1rem;
-  background-color: #ffffff; /* White background color */
 }
 
 /* Styles for the InputRange component */
 .input-range-container {
   margin-top: 1rem;
-  background-color: #ffffff;
-/* White background color */
 }
+

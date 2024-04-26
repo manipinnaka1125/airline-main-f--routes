@@ -20,6 +20,9 @@ function PassengerForm({ onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(passengerInfo);
+    // Redirect to payment gateway after submitting with passenger details as query parameters
+    const queryString = new URLSearchParams(passengerInfo).toString();
+    window.location.href = `/PaymentGateway?${queryString}`;
   };
 
   return (

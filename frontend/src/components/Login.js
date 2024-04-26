@@ -16,6 +16,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -29,12 +30,11 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
-export default function Login({store}) {
+export default function Login({ store }) {
   const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -42,26 +42,21 @@ export default function Login({store}) {
       un: data.get('un'),
       pw: data.get('pw'),
     });
-    axios.post('http://localhost:8081/check',{
-      un:data.get('un'),
+    axios.post('http://localhost:8081/check', {
+      un: data.get('un'),
       pw: data.get('pw'),
     })
-    .then((Response)=>{
+      .then((Response) => {
         console.log(Response.data);
-        // Inside the Login component after successful login
-if (Response.data !== "fail") {
-  toast.success("Login Successful");
-  setTimeout(() => {
-    navigate('/PassengerHome', { state: { username: Response.data.name } }); // Pass the username in state
-  }, 1000);
-} else {
-  toast.error("Invalid Login");
-}
-
-
-        
-    })
-    
+        if (Response.data !== "fail") {
+          toast.success("Login Successful");
+          setTimeout(() => {
+            navigate('/PassengerHome', { state: { username: Response.data.name } });
+          }, 1000);
+        } else {
+          toast.error("Invalid Login");
+        }
+      })
   };
 
   return (
@@ -70,12 +65,15 @@ if (Response.data !== "fail") {
         <CssBaseline />
         <Box
           sx={{
-            
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-           
-            marginTop:'100px',
+            boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)',
+            borderRadius: '10px',
+            padding: '20px',
+            background: 'linear-gradient(to top left, #f7c4f3, #fceabb)',
+            marginTop: '100px',
+            marginBottom: '200px',
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -116,7 +114,6 @@ if (Response.data !== "fail") {
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
-            
             </Button>
             <Grid container>
               <Grid item xs>
@@ -134,7 +131,7 @@ if (Response.data !== "fail") {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-      <ToastContainer/>
+      <ToastContainer />
     </ThemeProvider>
   );
 }

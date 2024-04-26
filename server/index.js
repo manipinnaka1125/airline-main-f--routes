@@ -14,7 +14,7 @@ const Client = new MongoClient('mongodb+srv://admin1:admin1@cluster0.wyowjiq.mon
 Client.connect();
 const db = Client.db('skill');
 const col = db.collection('user');
-
+const bookingsCol = db.collection('bookings');
 
 
 
@@ -125,19 +125,32 @@ app.post('/contact', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
-app.post('/post-endpoint', (req, res) => {
-  // Access the data sent from the client
-  const { btnType, passengerCount, priceRange, bookReturn, originCity, destinationCity, departureDate, returnDate, filteredData, isSearchClicked, returnFilterData } = req.body;
+app.post('/post-endpoint', async (req, res) => {
+  try {
+    const {
+      btnType, passengerCount, priceRange, bookReturn,
+      originCity, destinationCity, departureDate, returnDate,
+      filteredData, isSearchClicked, returnFilterData
+    } = req.body;
 
-  // Here you can perform operations with the received data, such as saving it to a database
+    
+    const bookingData = {
+      btnType, passengerCount, priceRange, bookReturn,
+      originCity, destinationCity, departureDate, returnDate,
+      filteredData, isSearchClicked, returnFilterData
+    };
+    console.log('Booking data:', bookingData);
 
-  // For example, you can log the data to the console
-  console.log('Received data from client:');
-  console.log(req.body);
+    // Insert booking data into the MongoDB collection
+    await bookingsCol.insertOne(bookingData);
 
-  // Send a response to the client
-  res.send('Data received by server');
+    res.send('Booking data received and inserted into MongoDB collection');
+  } catch (error) {
+    console.error('Error inserting booking data into MongoDB:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
+
 
 const PORT = 8081;
 app.listen(PORT, () => {

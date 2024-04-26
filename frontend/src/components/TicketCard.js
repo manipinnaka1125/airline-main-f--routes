@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import PassengerForm from './PassengerForm';
+import PaymentGateway from './PaymentGateway'; // Import PaymentGateway component
 
 function TicketCard(props) {
   const { filteredData, passengerCount } = props;
-  const [showPassengerForm, setShowPassengerForm] = useState(false);
   const [selectedFlight, setSelectedFlight] = useState(null);
+  const [redirectToPayment, setRedirectToPayment] = useState(false);
 
   const handleBookButtonClick = (flight) => {
     setSelectedFlight(flight);
-    setShowPassengerForm(true);
+  };
+
+  // Function to handle redirection to PaymentGateway
+  const redirectToPaymentGateway = () => {
+    setRedirectToPayment(true);
   };
 
   const handlePassengerFormSubmit = (passengerInfo) => {
-    // Handle the submission of passenger information here
-    // For example, you can pass it to a function to confirm the booking
     console.log('Selected Flight:', selectedFlight);
     console.log('Passenger Info:', passengerInfo);
-    // After handling the submission, you can reset the form state and close the form
-    setShowPassengerForm(false);
+    redirectToPaymentGateway(); // Redirect to PaymentGateway
   };
 
   return (
@@ -79,31 +81,34 @@ function TicketCard(props) {
                     <button
                       type="button"
                       className="btn btn-sm btn-info"
-                      onClick={() => handleBookButtonClick(data)}
+                      onClick={() => {
+                        handleBookButtonClick(data);
+                        redirectToPaymentGateway(); // Redirect to PaymentGateway
+                      }}
                     >
                       <b>Book</b>
                     </button>
                   </div>
                 </div>
               </div>
+              {selectedFlight && selectedFlight === data && (
+                <div className="card mt-3">
+                  <div className="card-body">
+                    <h5 className="card-title">Passenger Details</h5>
+                    <PassengerForm
+                      flight={selectedFlight}
+                      passengerCount={passengerCount}
+                      onSubmit={handlePassengerFormSubmit} // Pass onSubmit function
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         );
       })}
-
-      {/* Passenger Form */}
-      {showPassengerForm && (
-        <div className="card mt-3">
-          <div className="card-body">
-            <h5 className="card-title">Passenger Details</h5>
-            <PassengerForm
-              flight={selectedFlight}
-              passengerCount={passengerCount}
-              onSubmit={handlePassengerFormSubmit}
-            />
-          </div>
-        </div>
-      )}
+      {/* Redirect to PaymentGateway if redirectToPayment is true */}
+      {redirectToPayment && <PaymentGateway />}
     </>
   );
 }

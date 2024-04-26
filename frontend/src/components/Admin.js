@@ -34,42 +34,46 @@ const Admin = () => {
   };
 
   return (
-    <div>
+    <div style={{ background: 'linear-gradient(to top left, #cfd9df, #e2ebf0)', minHeight: '100vh', padding: '50px 0' }}>
       <center>
-        <h1>ADMIN PANEL</h1>
-        <table style={{ width: '95%', color: 'black', backgroundColor: 'rgba(255, 255, 255, 0.7)', border: '1px solid black', borderRadius: '10px', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)', borderCollapse: 'collapse' }}>
+        <h1 style={{ marginBottom: '30px', fontSize: '2rem', color: '#333' }}>ADMIN PANEL</h1>
+        <table style={{ width: '95%', color: '#333', backgroundColor: '#fff', border: '1px solid #ddd', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)', borderCollapse: 'collapse' }}>
           <thead>
-            <tr style={{ border: '1px solid black' }}>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Name</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Role</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Email</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Password</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Update Details</th>
+            <tr style={{ border: '1px solid #ddd', backgroundColor: '#f7f7f7' }}>
+              <th style={{ border: '1px solid #ddd', padding: '8px' }}>Name</th>
+              <th style={{ border: '1px solid #ddd', padding: '8px' }}>Role</th>
+              <th style={{ border: '1px solid #ddd', padding: '8px' }}>Email</th>
+              <th style={{ border: '1px solid #ddd', padding: '8px' }}>Password</th>
+              <th style={{ border: '1px solid #ddd', padding: '8px' }}>Update Details</th>
             </tr>
           </thead>
           <tbody>
             {
               res.map((item, index) => (
-                <tr key={index} style={{ border: '1px solid black' }}>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{item.name}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{item.role}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{item.email}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{item.password}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>
+                <tr key={index} style={{ border: '1px solid #ddd', backgroundColor: index % 2 === 0 ? '#f7f7f7' : '#fff' }}>
+                  <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.name}</td>
+                  <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.role}</td>
+                  <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.email}</td>
+                  <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.password}</td>
+                  <td style={{ border: '1px solid #ddd', padding: '8px' }}>
                     <input type='text' name='name'
                       placeholder='New Name'
-                      onChange={changeHandler} />
+                      onChange={changeHandler}
+                      style={{ marginRight: '5px', padding: '5px', borderRadius: '5px', border: '1px solid #ddd' }} />
                     <input type='text' name='role'
                       placeholder='New Role'
-                      onChange={changeHandler} />
+                      onChange={changeHandler}
+                      style={{ marginRight: '5px', padding: '5px', borderRadius: '5px', border: '1px solid #ddd' }} />
                     <input type='text' name='email'
                       placeholder='New Email'
-                      onChange={changeHandler} />
+                      onChange={changeHandler}
+                      style={{ marginRight: '5px', padding: '5px', borderRadius: '5px', border: '1px solid #ddd' }} />
                     <input type='password' name='password'
                       placeholder='New Password'
-                      onChange={changeHandler} />
-                    <button onClick={() => updateData(item._id)}>update</button>
-                    <button onClick={() => handleDelete(item._id)}>delete</button>
+                      onChange={changeHandler}
+                      style={{ marginRight: '5px', padding: '5px', borderRadius: '5px', border: '1px solid #ddd' }} />
+                    <button onClick={() => updateData(item._id)} style={{ marginRight: '5px', padding: '5px 10px', borderRadius: '5px', border: 'none', background: 'linear-gradient(to right, #4caf50, #2e7d32)', color: '#fff', cursor: 'pointer' }}>Update</button>
+                    <button onClick={() => handleDelete(item._id)} style={{ padding: '5px 10px', borderRadius: '5px', border: 'none', background: 'linear-gradient(to right, #f44336, #d32f2f)', color: '#fff', cursor: 'pointer' }}>Delete</button>
                   </td>
                 </tr>
               ))

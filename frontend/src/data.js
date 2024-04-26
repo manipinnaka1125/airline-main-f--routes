@@ -8,13 +8,81 @@ import vistara from './assets/vistara.png';
 
 const data = [
     {
-      price: 2500,
-      depart: '2024-03-25',
-      arrival: '2024-03-25',
+      price: 4000,
+      depart: '2024-04-26',
+      arrival: '2024-04-26',
+      departTime: '10:15 am',
+      arrivalTime: '11:45 am',
+      code: 'TY-5349',
+      flightImg:saudia,
+      from: {
+        city: 'Delhi-DEL',
+        short: 'DEL',
+      },
+      to: {
+        city: 'Mumbai-BOM',
+        short: 'BOM',
+      },
+    },
+    {
+      price: 3000,
+      depart: '2024-04-26',
+      arrival: '2024-04-26',
+      departTime: '10:15 am',
+      arrivalTime: '11:45 am',
+      code: 'TY-2812',
+      flightImg:airIndia,
+      from: {
+        city: 'Delhi-DEL',
+        short: 'DEL',
+      },
+      to: {
+        city: 'Mumbai-BOM',
+        short: 'BOM',
+      },
+    },
+    {
+      price: 3500,
+      depart: '2024-04-26',
+      arrival: '2024-04-26',
       departTime: '10:15 am',
       arrivalTime: '11:45 am',
       code: 'TY-6239',
-      flightImg:saudia,
+      flightImg:kuwait,
+      from: {
+        city: 'Delhi-DEL',
+        short: 'DEL',
+      },
+      to: {
+        city: 'Mumbai-BOM',
+        short: 'BOM',
+      },
+    },
+    {
+      price: 4500,
+      depart: '2024-04-26',
+      arrival: '2024-04-26',
+      departTime: '10:15 am',
+      arrivalTime: '11:45 am',
+      code: 'TY-6239',
+      flightImg:emirates,
+      from: {
+        city: 'Delhi-DEL',
+        short: 'DEL',
+      },
+      to: {
+        city: 'Mumbai-BOM',
+        short: 'BOM',
+      },
+    },
+    {
+      price: 5000,
+      depart: '2024-04-26',
+      arrival: '2024-04-26',
+      departTime: '10:15 am',
+      arrivalTime: '11:45 am',
+      code: 'TY-6239',
+      flightImg:vistara,
       from: {
         city: 'Delhi-DEL',
         short: 'DEL',
