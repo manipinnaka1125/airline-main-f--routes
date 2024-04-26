@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient,ObjectId } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
@@ -9,52 +9,41 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-
-const Client = new MongoClient('mongodb+srv://admin1:admin1@cluster0.wyowjiq.mongodb.net/?retryWrites=true&w=majority');
+const Client = new MongoClient(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 Client.connect();
 const db = Client.db('skill');
 const col = db.collection('user');
 const bookingsCol = db.collection('bookings');
+
 // Nodemailer configuration
 const transporter = nodemailer.createTransport({
-  service: 'pinnakamaniswaroop@gmail.com', // Update with your email service provider
-  port: 587,
-  secure: false,
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD,
   },
 });
 
-app.get('/',(req,res)=>{
-  res.send("Its Working")
-})
+app.get('/', (req, res) => {
+  res.send("It's Working");
+});
 
 app.post('/insert', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 5);
-    // Save the hashed password to the database
     req.body.password = hashedPassword;
-    console.log(req.body);
 
-    // Insert user data into the database
     await col.insertOne(req.body);
 
-    // Send registration confirmation email
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: req.body.email,
       subject: 'Registration Confirmation',
-      text: 'Dear CUSTOMER Welcome to Marcos Airlines! 🌟 You have been successfully registered !! Thank you for choosing AIREASE Airlines.  unforgettable journeys! Safe travels,The MARCOS Airlines Team ✈️ YOUR ONE TIME PASSWORD IS 196837',
+      text: 'Dear CUSTOMER, Welcome to Marcos Airlines! 🌟 You have been successfully registered! Thank you for choosing AIREASE Airlines for unforgettable journeys! Safe travels, The MARCOS Airlines Team ✈️ YOUR ONE TIME PASSWORD IS 196837',
     };
-    
-    try {
-      await transporter.sendMail(mailOptions);
-      res.send('Data Received');
-    } catch (error) {
-      console.error('Error during registration email sending:', error.message);
-      res.status(500).send('Internal Server Error');
-    }
+
+    await transporter.sendMail(mailOptions);
+    res.send('Data Received');
   } catch (error) {
     console.error('Error during registration:', error.message);
     res.status(500).send('Internal Server Error');
@@ -63,9 +52,8 @@ app.post('/insert', async (req, res) => {
 
 app.post('/check', async (req, res) => {
   try {
-    console.log(req.body);
     const result = await col.findOne({ name: req.body.un });
-    if (result !== null && (await bcrypt.compare(req.body.pw, result.password))) {
+    if (result && await bcrypt.compare(req.body.pw, result.password)) {
       res.send(result);
     } else {
       res.send('fail');
@@ -86,34 +74,47 @@ app.get('/show', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
-app.get('/retrive', async (req, res) => {
-  const result =await  col.find().toArray()
-  console.log(result)
-  res.send(result)
-})
-app.put('/users/:id', async (req,res)=>{ 
-  const {id}= req.params 
-  const {name, lastname, role, email, password}=req.body 
-  const result= await col.updateOne({_id: new ObjectId(id)}, {$set:{name,lastname, role, email, password} }) 
-  res.send('updated') 
-})
 
-app.delete('/users/:id',async (req,res)=>{
-  const {id}=req.params
-  const result= await col.deleteOne({_id:new ObjectId(id)})
-  res.json({message:'deleted sucessfully'})
-})
-app.post('/register',(req,res)=>{
+app.get('/retrive', async (req, res) => {
+  try {
+    const result = await col.find().toArray();
+    console.log(result);
+    res.send(result);
+  } catch (error) {
+    console.error('Error fetching data:', error.message);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.put('/users/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name, lastname, role, email, password } = req.body;
+  const result = await col.updateOne({ _id: new ObjectId(id) }, { $set: { name, lastname, role, email, password } });
+  res.send('updated');
+});
+
+app.delete('/users/:id', async (req, res) => {
+  const { id } = req.params;
+  const result = await col.deleteOne({ _id: new ObjectId(id) });
+  res.json({ message: 'deleted successfully' });
+});
+
+app.post('/register', (req, res) => {
   col.insertOne(req.body)
-  console.log(req.body)
-  res.send("data inserted successfully")
-})
+    .then(() => {
+      console.log(req.body);
+      res.send('Data inserted successfully');
+    })
+    .catch(error => {
+      console.error('Error during registration:', error.message);
+      res.status(500).send('Internal Server Error');
+    });
+});
 
 app.post('/contact', async (req, res) => {
   try {
     const { name, email, message } = req.body;
 
-    // Insert contact form data into the database
     await col.insertOne({ name, email, message });
 
     res.send('Contact form data submitted successfully');
@@ -122,6 +123,7 @@ app.post('/contact', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
 app.post('/post-endpoint', async (req, res) => {
   try {
     const {
@@ -130,15 +132,14 @@ app.post('/post-endpoint', async (req, res) => {
       filteredData, isSearchClicked, returnFilterData
     } = req.body;
 
-    // Log the booking data to the terminal
     const bookingData = {
       btnType, passengerCount, priceRange, bookReturn,
       originCity, destinationCity, departureDate, returnDate,
       filteredData, isSearchClicked, returnFilterData
     };
+
     console.log('Booking data:', bookingData);
 
-    // Insert booking data into the MongoDB collection
     await bookingsCol.insertOne(bookingData);
 
     res.send('Booking data received and inserted into MongoDB collection');
@@ -148,7 +149,7 @@ app.post('/post-endpoint', async (req, res) => {
   }
 });
 
-const PORT = 8081;
+const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
   console.log(`Server Running on port ${PORT}`);
 });
