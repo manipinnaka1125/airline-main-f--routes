@@ -125,6 +125,19 @@ app.post('/contact', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+app.post('/post-endpoint', (req, res) => {
+  // Access the data sent from the client
+  const { btnType, passengerCount, priceRange, bookReturn, originCity, destinationCity, departureDate, returnDate, filteredData, isSearchClicked, returnFilterData } = req.body;
+
+  // Here you can perform operations with the received data, such as saving it to a database
+
+  // For example, you can log the data to the console
+  console.log('Received data from client:');
+  console.log(req.body);
+
+  // Send a response to the client
+  res.send('Data received by server');
+});
 
 const PORT = 8081;
 app.listen(PORT, () => {

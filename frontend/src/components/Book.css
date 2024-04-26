@@ -43,9 +43,9 @@
   width: 100%;
   margin-top: 0.5rem;
   border-radius: 8px;
-  color:white;
+  color:rgb(0, 0, 0);
   margin-bottom: 20px;
-  background-color: #000000; /* White background color */
+  background-color: #fff4f4; /* White background color */
 }
 
 /* Styles for the passenger count section */

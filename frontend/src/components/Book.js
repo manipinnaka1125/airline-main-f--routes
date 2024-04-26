@@ -4,7 +4,7 @@ import flightData from "../data";
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
 import './Book.css';
-
+import axios from 'axios';
 
 function Search() {
   const [btnType, setbtnType] = useState("oneWay");
@@ -111,6 +111,27 @@ function Search() {
     setReturnFilterData(result);
   };
 
+  const postDataToServer = () => {
+    const postData = {
+      btnType,
+      passengerCount,
+      priceRange,
+      bookReturn,
+      originCity,
+      destinationCity,
+      departureDate,
+      returnDate,
+      filteredData,
+      isSearchClicked,
+      returnFilterData
+    };
+
+    axios.post('http://localhost:8081/post-endpoint', postData)
+      .catch(error => {
+        console.error('Error posting data to server:', error);
+      });
+  };
+
   const handleSearch = () => {
     if (bookReturn && !returnDate) {
       alert("Return date can't be empty!");
@@ -127,6 +148,7 @@ function Search() {
       if (bookReturn && returnDate) {
         returnFilter();
       }
+      postDataToServer();
     }
   };
 
