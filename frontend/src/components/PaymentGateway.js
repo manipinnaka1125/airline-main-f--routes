@@ -50,95 +50,85 @@ function PaymentGateway({ passengerInfo }) {
             <option value="netBanking">Net Banking</option>
           </select>
         </div>
-        {paymentMethod && (
-          <div>
-            {paymentMethod === 'upi' && (
-              <div>
-              <center>  <label>UPI ID:</label>
-                <input
-                  type="text"
-                  name="upiId"
-                  value={paymentDetails.upiId}
-                  onChange={handlePaymentDetailsChange}
-                  required
-                /></center>
-              </div>
-            )}
-            {paymentMethod === 'card' && (
-             <div>
-             <label>Card Number:</label>
-             <input
-               type="text"
-               name="cardNumber"
-               value={paymentDetails.cardNumber}
-               onChange={handlePaymentDetailsChange}
-               required
-             />
-             <br></br>
-             <br></br>
-             <label>Cardholder Name:</label>
-             <input
-               type="text"
-               name="cardName"
-               value={paymentDetails.cardName}
-               onChange={handlePaymentDetailsChange}
-               required
-             /><br></br>
-             <br></br>
-             <label>Expiry Date:</label>
-             <input
-               type="text"
-               name="expiryDate"
-               value={paymentDetails.expiryDate}
-               onChange={handlePaymentDetailsChange}
-               required
-             /><br></br>
-             <br></br>
-             <label>CVV:</label>
-             <input
-               type="text"
-               name="cvv"
-               value={paymentDetails.cvv}
-               onChange={handlePaymentDetailsChange}
-               required
-             /><br></br>
-             <br></br>
-           </div>
-            )}
-            {paymentMethod === 'netBanking' && (
-             <div>
-             <label>Bank Name:</label>
-             <input
-               type="text"
-               name="bankName"
-               value={paymentDetails.bankName}
-               onChange={handlePaymentDetailsChange}
-               required
-             /><br></br>
-             <br></br>
-             <label>Account Number:</label>
-             <input
-               type="text"
-               name="accountNumber"
-               value={paymentDetails.accountNumber}
-               onChange={handlePaymentDetailsChange}
-               required
-             /><br></br>
-             <br></br>
-             <label>IFSC Code:</label>
-             <input
-               type="text"
-               name="ifscCode"
-               value={paymentDetails.ifscCode}
-               onChange={handlePaymentDetailsChange}
-               required
-             /><br></br>
-             <br></br>
-           </div>
-            )}
-            {/* Add fields for other payment methods */}
-          </div>
-        )}
+        {paymentMethod === 'card' && (
+  <div>
+    <div className="input-group">
+      <label>Card Number:</label>
+      <input
+        type="text"
+        name="cardNumber"
+        value={paymentDetails.cardNumber}
+        onChange={handlePaymentDetailsChange}
+        required
+      />
+    </div>
+    <div className="input-group">
+      <label>Cardholder Name:</label>
+      <input
+        type="text"
+        name="cardName"
+        value={paymentDetails.cardName}
+        onChange={handlePaymentDetailsChange}
+        required
+      />
+    </div>
+    <div className="input-group">
+      <label>Expiry Date:</label>
+      <input
+        type="text"
+        name="expiryDate"
+        value={paymentDetails.expiryDate}
+        onChange={handlePaymentDetailsChange}
+        required
+      />
+    </div>
+    <div className="input-group">
+      <label>CVV:</label>
+      <input
+        type="text"
+        name="cvv"
+        value={paymentDetails.cvv}
+        onChange={handlePaymentDetailsChange}
+        required
+      />
+    </div>
+  </div>
+)}
+{paymentMethod === 'netBanking' && (
+  <div>
+    <div className="input-group">
+      <label>Bank Name:</label>
+      <input
+        type="text"
+        name="bankName"
+        value={paymentDetails.bankName}
+        onChange={handlePaymentDetailsChange}
+        required
+      />
+    </div>
+    <div className="input-group">
+      <label>Account Number:</label>
+      <input
+        type="text"
+        name="accountNumber"
+        value={paymentDetails.accountNumber}
+        onChange={handlePaymentDetailsChange}
+        required
+      />
+    </div>
+    <div className="input-group">
+      <label>IFSC Code:</label>
+      <input
+        type="text"
+        name="ifscCode"
+        value={paymentDetails.ifscCode}
+        onChange={handlePaymentDetailsChange}
+        required
+      />
+    </div>
+  </div>
+)}
+
         <br></br>
        <center> <button className="button1" type="submit">Pay Now</button></center>
       </form>

@@ -34,6 +34,23 @@
   align-items: center;
   cursor: pointer; /* Added for cursor change on hover */
 }
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    margin-bottom: 5px;
+    color: #000000; /* Text color */
+  }
+  
+  .input-group input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
 
 .button1:hover {
   background-color: #008CBA;

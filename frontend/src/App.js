@@ -16,6 +16,7 @@ import Team from './components/Team'
 import PassengerHome from './components/PassengerHome';
 import PaymentGateway from './components/PaymentGateway';
 
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -46,6 +47,7 @@ function App() {
             <Route path='/admin' element={<Admin />} exact />
             <Route path='/logout' element={<Logout />} exact />
             <Route path='/Team' element={<Team/>} exact />
+            
             <Route path='/PassengerHome' element={<PassengerHome/>}exact/>
             <Route path='/PaymentGateway' element={<PaymentGateway/>}exact/>
           </Routes>
