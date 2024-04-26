@@ -15,21 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
 import Select from '@mui/material/Select';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const defaultTheme = createTheme();
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Registration() {
   const [formData, setFormData] = useState({
@@ -60,9 +47,15 @@ function Registration() {
         .then((response) => {
           console.log(response.data);
           setRegistrationSuccess(true);
+          toast.success('Registration successful');
+          // Redirect to login page
+          setTimeout(() => {
+            window.location.href = '/login';
+          }, 1000);
         })
         .catch((error) => {
           console.error('Error:', error);
+          toast.error('An error occurred during registration. Please try again later.');
         });
     } else {
       setFormErrors(errors);
@@ -94,7 +87,7 @@ function Registration() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme()}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -218,7 +211,6 @@ function Registration() {
               disabled={Object.keys(formErrors).length !== 0}
             >
               Sign Up
-              
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
@@ -229,8 +221,8 @@ function Registration() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
+      <ToastContainer />
     </ThemeProvider>
   );
 }

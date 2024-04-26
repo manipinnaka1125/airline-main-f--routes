@@ -14,10 +14,7 @@ const Client = new MongoClient('mongodb+srv://admin1:admin1@cluster0.wyowjiq.mon
 Client.connect();
 const db = Client.db('skill');
 const col = db.collection('user');
-
-
-
-
+const bookingsCol = db.collection('bookings');
 // Nodemailer configuration
 const transporter = nodemailer.createTransport({
   service: 'pinnakamaniswaroop@gmail.com', // Update with your email service provider
@@ -48,7 +45,7 @@ app.post('/insert', async (req, res) => {
       from: process.env.EMAIL_USER,
       to: req.body.email,
       subject: 'Registration Confirmation',
-      text: 'Dear CUSTOMER Welcome to Marcos Airlines! 🌟 You have been successfully registered. Get ready for a journey filled with comfort and luxury.At MARCOS Airlines, we are dedicated to making your travels seamless and enjoyable. From our top-notch aircraft to our friendly staff, every moment with us is designed for your satisfaction. Thank you for choosing AIREASE Airlines.  unforgettable journeys! Safe travels,The MARCOS Airlines Team ✈️',
+      text: 'Dear CUSTOMER Welcome to Marcos Airlines! 🌟 You have been successfully registered !! Thank you for choosing AIREASE Airlines.  unforgettable journeys! Safe travels,The MARCOS Airlines Team ✈️ YOUR ONE TIME PASSWORD IS 196837',
     };
     
     try {
@@ -122,6 +119,31 @@ app.post('/contact', async (req, res) => {
     res.send('Contact form data submitted successfully');
   } catch (error) {
     console.error('Error submitting contact form:', error.message);
+    res.status(500).send('Internal Server Error');
+  }
+});
+app.post('/post-endpoint', async (req, res) => {
+  try {
+    const {
+      btnType, passengerCount, priceRange, bookReturn,
+      originCity, destinationCity, departureDate, returnDate,
+      filteredData, isSearchClicked, returnFilterData
+    } = req.body;
+
+    // Log the booking data to the terminal
+    const bookingData = {
+      btnType, passengerCount, priceRange, bookReturn,
+      originCity, destinationCity, departureDate, returnDate,
+      filteredData, isSearchClicked, returnFilterData
+    };
+    console.log('Booking data:', bookingData);
+
+    // Insert booking data into the MongoDB collection
+    await bookingsCol.insertOne(bookingData);
+
+    res.send('Booking data received and inserted into MongoDB collection');
+  } catch (error) {
+    console.error('Error inserting booking data into MongoDB:', error);
     res.status(500).send('Internal Server Error');
   }
 });
