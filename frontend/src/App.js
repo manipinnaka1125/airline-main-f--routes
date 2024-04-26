@@ -18,7 +18,8 @@ import PaymentGateway from './components/PaymentGateway';
 import BookingsData from './components/BookingsData';
 import FlightData from './components/FlightData';
 import AdminLogin from './components/AdminLogin';
-
+import PaymentSuccessful from './components/PaymentSuccessful';
+import Ticket from './components/Ticket';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -55,6 +56,8 @@ function App() {
             <Route path='/PaymentGateway' element={<PaymentGateway/>}exact/>
             <Route path='/FlightData' element={<FlightData/>}exact/>
             <Route path='/AdminLogin' element={<AdminLogin/>}exact/>
+            <Route path='/PaymentSuccessful' element={<PaymentSuccessful/>}exact/>
+            <Route path='/Ticket' element={<Ticket/>}exact/>
           </Routes>
         )}
       </main>

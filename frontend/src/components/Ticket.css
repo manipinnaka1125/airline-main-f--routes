@@ -1,0 +1,50 @@
+.ticket-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+  }
+  
+  .ticket-card {
+    
+    width: 400px;
+    padding: 70px 70px 70px 70px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #a4a4a4;
+  }
+  
+  .ticket-title {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 50px;
+    margin-top: 2px;
+  }
+  
+  .ticket-info {
+    margin-bottom: 20px;
+   
+  }
+  
+  .ticket-info p {
+    margin: 5px 0;
+  }
+  
+  .cancel-ticket-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cancel-ticket-button:hover {
+    background-color: #c82333;
+  }
+  
