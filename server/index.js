@@ -15,7 +15,7 @@ Client.connect();
 const db = Client.db('skill');
 const col = db.collection('user');
 const bookingsCol = db.collection('bookings');
-
+const passengerDetailsCol = db.collection('passengerdetails');
 
 
 // Nodemailer configuration
@@ -150,6 +150,40 @@ app.post('/post-endpoint', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+app.post('/passenger-form', async (req, res) => {
+  try {
+    const passengerFormData = req.body; // Get passenger form data from the request body
+
+    // Log the received data in the server terminal
+    console.log('Received passenger form data:', passengerFormData);
+
+    // Insert passenger form data into the new MongoDB collection 'passengerdetails'
+    await passengerDetailsCol.insertOne(passengerFormData);
+
+    res.send('Passenger form data received and inserted into passengerdetails collection');
+  } catch (error) {
+    console.error('Error inserting passenger form data into MongoDB:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+// Server-side code (app.js or routes file)
+
+app.get('/retrieve/passengerdetails', async (req, res) => {
+  try {
+    // Retrieve passenger details from the MongoDB collection
+    const passengerDetails = await passengerDetailsCol.find().toArray();
+    res.json(passengerDetails);
+  } catch (error) {
+    console.error('Error retrieving passenger details:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+// Server-side code (app.js or routes file)
+
+
+
+
+
 
 
 const PORT = 8081;

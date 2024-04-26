@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // Import Link from React Router
 
 const Admin = () => {
   const [res, setRes] = useState([]);
-  const [formData, setFormData] = useState({ name: '', role: '', email: '', password: '' });
+  const [formData, setFormData] = useState({ name: '', role: '', email: '', password: '' }); // Add formData state
 
   const fetchData = async () => {
     await axios.get('http://localhost:8081/retrive')
@@ -18,7 +19,7 @@ const Admin = () => {
 
   const updateData = async (id) => {
     console.log(id);
-    const res = await axios.put(`http://localhost:8081/users/${id}`, formData);
+    const res = await axios.put(`http://localhost:8081/users/${id}`, formData); // Use formData here
     fetchData();
     console.log(res.data);
   };
@@ -30,13 +31,18 @@ const Admin = () => {
     fetchData();
   };
   const changeHandler = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value }); // Update formData state
   };
 
   return (
     <div style={{ background: 'linear-gradient(to top left, #cfd9df, #e2ebf0)', minHeight: '100vh', padding: '50px 0' }}>
       <center>
         <h1 style={{ marginBottom: '30px', fontSize: '2rem', color: '#333' }}>ADMIN PANEL</h1>
+        <div style={{ marginBottom: '20px' }}>
+          <Link to="/Admin" style={{ marginRight: '20px', color: '#333', textDecoration: 'none', fontSize: '1.2rem', display: 'inline-block', padding: '10px 20px', borderRadius: '5px', background: '#f0f0f0', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', transition: 'background 0.3s' }}>Admin Panel</Link>
+          <Link to="/BookingsData" style={{ marginRight: '20px', color: '#333', textDecoration: 'none', fontSize: '1.2rem', display: 'inline-block', padding: '10px 20px', borderRadius: '5px', background: '#f0f0f0', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', transition: 'background 0.3s' }}>Bookings</Link>
+          <Link to="/FlightData" style={{ color: '#333', textDecoration: 'none', fontSize: '1.2rem', display: 'inline-block', padding: '10px 20px', borderRadius: '5px', background: '#f0f0f0', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', transition: 'background 0.3s' }}>Flight Data</Link>
+        </div>
         <table style={{ width: '95%', color: '#333', backgroundColor: '#fff', border: '1px solid #ddd', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)', borderCollapse: 'collapse' }}>
           <thead>
             <tr style={{ border: '1px solid #ddd', backgroundColor: '#f7f7f7' }}>

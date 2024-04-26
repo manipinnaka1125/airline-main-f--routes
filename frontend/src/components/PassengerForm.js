@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function PassengerForm({ onSubmit }) {
   const [passengerInfo, setPassengerInfo] = useState({
@@ -17,12 +18,19 @@ function PassengerForm({ onSubmit }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(passengerInfo);
-    // Redirect to payment gateway after submitting with passenger details as query parameters
-    const queryString = new URLSearchParams(passengerInfo).toString();
-    window.location.href = `/PaymentGateway?${queryString}`;
+    try {
+      // Send POST request to server
+      await axios.post('http://localhost:8081/passenger-form', passengerInfo); // Update URL if needed
+      onSubmit(passengerInfo);
+      // Redirect to payment gateway after submitting with passenger details as query parameters
+      const queryString = new URLSearchParams(passengerInfo).toString();
+      window.location.href = `/PaymentGateway?${queryString}`;
+    } catch (error) {
+      console.error('Error submitting passenger form:', error);
+      // Handle error
+    }
   };
 
   return (

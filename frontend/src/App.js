@@ -15,6 +15,9 @@ import LoadingAnimation from './components/Loading';
 import Team from './components/Team'
 import PassengerHome from './components/PassengerHome';
 import PaymentGateway from './components/PaymentGateway';
+import BookingsData from './components/BookingsData';
+import FlightData from './components/FlightData';
+import AdminLogin from './components/AdminLogin';
 
 
 function App() {
@@ -47,9 +50,11 @@ function App() {
             <Route path='/admin' element={<Admin />} exact />
             <Route path='/logout' element={<Logout />} exact />
             <Route path='/Team' element={<Team/>} exact />
-            
+            <Route path='/BookingsData' element={<BookingsData/>}exact/>
             <Route path='/PassengerHome' element={<PassengerHome/>}exact/>
             <Route path='/PaymentGateway' element={<PaymentGateway/>}exact/>
+            <Route path='/FlightData' element={<FlightData/>}exact/>
+            <Route path='/AdminLogin' element={<AdminLogin/>}exact/>
           </Routes>
         )}
       </main>
