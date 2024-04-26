@@ -141,8 +141,9 @@ function Search() {
       alert("Destination city can't be empty!");
     } else if (!departureDate) {
       alert("Departure date can't be empty!");
-    }
-    if (originCity && destinationCity && departureDate) {
+    } else if (returnDate && new Date(returnDate) < new Date(departureDate)) {
+      alert("Return date must be greater than or equal to departure date!");
+    } else {
       setIsSearchClicked(true);
       handleFilter();
       if (bookReturn && returnDate) {
@@ -151,7 +152,7 @@ function Search() {
       postDataToServer();
     }
   };
-
+  
   return (
     <div>
       <div className="row mt-4 ml-5 mr-5">

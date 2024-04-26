@@ -15,8 +15,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
 import Select from '@mui/material/Select';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const defaultTheme = createTheme();
+
+
+
 
 function Registration() {
   const [formData, setFormData] = useState({
@@ -47,9 +52,15 @@ function Registration() {
         .then((response) => {
           console.log(response.data);
           setRegistrationSuccess(true);
+          toast.success('Registration successful');
+          // Redirect to login page
+          setTimeout(() => {
+            window.location.href = '/login';
+          }, 1000);
         })
         .catch((error) => {
           console.error('Error:', error);
+          toast.error('An error occurred during registration. Please try again later.');
         });
     } else {
       setFormErrors(errors);
@@ -81,7 +92,7 @@ function Registration() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme()}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -235,7 +246,9 @@ function Registration() {
           {new Date().getFullYear()}
           {'.'}
         </Typography>
+
       </Container>
+      <ToastContainer />
     </ThemeProvider>
   );
 }
