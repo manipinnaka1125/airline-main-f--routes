@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -7,15 +8,30 @@ const Contact = () => {
     message: '',
   });
 
+  const [submitted, setSubmitted] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your form submission logic here
-    console.log('Form data submitted:', formData);
-    // You can add additional logic to handle form submission, e.g., sending data to a server
+    try {
+      const response = await axios.post('http://localhost:8081/contact', formData);
+      if (response.status === 200) {
+        console.log('Form data submitted:', formData);
+        setFormData({
+          name: '',
+          email: '',
+          message: '',
+        });
+        setSubmitted(true); // Set submitted to true after successful submission
+      } else {
+        console.error('Failed to submit form:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
   };
 
   const styles = {
@@ -27,13 +43,12 @@ const Contact = () => {
       color: '#000000', // Black text color
       borderRadius: '8px',
       boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-      marginTop:'100px',
-      marginBottom:'100px',
-    },  
+      marginTop: '100px',
+      marginBottom: '100px',
+    },
     contactForm: {
       display: 'flex',
       flexDirection: 'column',
-     
     },
     label: {
       marginBottom: '8px',
@@ -59,15 +74,19 @@ const Contact = () => {
       cursor: 'pointer',
       transition: 'background-color 0.3s ease',
     },
-    buttonHover: {
-      backgroundColor: '#0056b3',
-    },
   };
 
+  // Render "Thank You" message conditionally when submitted is true
+  const thankYouMessage = submitted && (
+    <div style={{ textAlign: 'center',  color:'white'}}>
+      <h1>Thank You!</h1>
+      <p>We have received your message.</p>
+    </div>
+  );
+
   return (
-   
     <div style={styles.contactContainer}>
-     <center><h2>Contact Us</h2></center> 
+      <center><h2>Contact Us</h2></center>
       <form onSubmit={handleSubmit} style={styles.contactForm}>
         <label style={styles.label}>
           Your Name:
@@ -108,7 +127,9 @@ const Contact = () => {
         <button type="submit" style={styles.button}>
           Submit
         </button>
-        <center><p> email for more info pinnakamaniswaroop@gmail.com</p></center>
+       
+        {thankYouMessage}
+        <center><p >Email for more info: pinnakamaniswaroop@gmail.com</p></center>
       </form>
     </div>
   );

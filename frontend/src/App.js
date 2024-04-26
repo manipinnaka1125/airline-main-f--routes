@@ -12,7 +12,8 @@ import Book from './components/Book';
 import Logout from './components/Logout';
 import Admin from './components/Admin';
 import LoadingAnimation from './components/Loading';
-import Team from './components/Team';
+import Team from './components/Team'
+import PassengerHome from './components/PassengerHome';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -21,8 +22,8 @@ function App() {
     // Simulate loading time
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // Simulating 2 seconds loading time
-  }, []); // Empty dependency array to run only once
+    }, 2000); // Simulate a 2-second delay for loadin
+  }, []);
 
   return (
     <React.Fragment>
@@ -43,7 +44,8 @@ function App() {
             <Route path='/about' element={<About />} exact />
             <Route path='/admin' element={<Admin />} exact />
             <Route path='/logout' element={<Logout />} exact />
-            <Route path='/Team' element={<Team />} exact />
+            <Route path='/Team' element={<Team/>} exact />
+            <Route path='/PassengerHome' element={<PassengerHome/>}exact/>
           </Routes>
         )}
       </main>

@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PassengerForm from './PassengerForm';
 
 function TicketCard(props) {
   const { filteredData, passengerCount } = props;
+  const [showPassengerForm, setShowPassengerForm] = useState(false);
+  const [selectedFlight, setSelectedFlight] = useState(null);
+
+  const handleBookButtonClick = (flight) => {
+    setSelectedFlight(flight);
+    setShowPassengerForm(true);
+  };
+
+  const handlePassengerFormSubmit = (passengerInfo) => {
+    // Handle the submission of passenger information here
+    // For example, you can pass it to a function to confirm the booking
+    console.log('Selected Flight:', selectedFlight);
+    console.log('Passenger Info:', passengerInfo);
+    // After handling the submission, you can reset the form state and close the form
+    setShowPassengerForm(false);
+  };
 
   return (
     <>
@@ -21,7 +38,7 @@ function TicketCard(props) {
                   <div>
                     <div
                       style={{
-                        marginBottom: '6px',
+                        marginBottom: '30px',
                         display: 'flex',
                         justifyContent: 'space-between',
                       }}
@@ -59,7 +76,11 @@ function TicketCard(props) {
                     />
                   </div>
                   <div>
-                    <button type="button" className="btn btn-sm btn-info">
+                    <button
+                      type="button"
+                      className="btn btn-sm btn-info"
+                      onClick={() => handleBookButtonClick(data)}
+                    >
                       <b>Book</b>
                     </button>
                   </div>
@@ -69,6 +90,20 @@ function TicketCard(props) {
           </div>
         );
       })}
+
+      {/* Passenger Form */}
+      {showPassengerForm && (
+        <div className="card mt-3">
+          <div className="card-body">
+            <h5 className="card-title">Passenger Details</h5>
+            <PassengerForm
+              flight={selectedFlight}
+              passengerCount={passengerCount}
+              onSubmit={handlePassengerFormSubmit}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }

@@ -138,7 +138,9 @@ function Search() {
             <div className="card-body">
               <div className="card">
                 <div className="card-body">
+                  <center><h1 className="HEL">ENTER FLIGHT DETAILS</h1></center>
                   <div className="btn-group d-flex justify-content-center">
+                    
                     {bookType.map((type) => {
                       return (
                         <button

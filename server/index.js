@@ -10,17 +10,17 @@ app.use(express.json());
 app.use(cors());
 
 
-const Client = new MongoClient('');
+const Client = new MongoClient('mongodb+srv://admin1:admin1@cluster0.wyowjiq.mongodb.net/?retryWrites=true&w=majority');
 Client.connect();
-const db = Client.db('');
-const col = db.collection('');
+const db = Client.db('skill');
+const col = db.collection('user');
 
 
 
 
 // Nodemailer configuration
 const transporter = nodemailer.createTransport({
-  service: '', // Update with your email service provider
+  service: 'pinnakamaniswaroop@gmail.com', // Update with your email service provider
   port: 587,
   secure: false,
   auth: {
@@ -111,6 +111,21 @@ app.post('/register',(req,res)=>{
   console.log(req.body)
   res.send("data inserted successfully")
 })
+
+app.post('/contact', async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+
+    // Insert contact form data into the database
+    await col.insertOne({ name, email, message });
+
+    res.send('Contact form data submitted successfully');
+  } catch (error) {
+    console.error('Error submitting contact form:', error.message);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 const PORT = 8081;
 app.listen(PORT, () => {
   console.log(`Server Running on port ${PORT}`);

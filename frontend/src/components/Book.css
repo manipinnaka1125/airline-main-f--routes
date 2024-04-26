@@ -1,35 +1,51 @@
 /* Search.css */
 
 /* Styles for the card container */
+/* Search.css */
+
+/* Styles for the card container */
+.HEL{
+  color: rgb(255, 255, 255);
+}
 .card-container {
   display: flex;
-  justify-content: space-between;
-  margin-top: 4rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
+  justify-content: center; /* Center the card horizontally */
+  align-items: center; /* Center the card vertically */
+  height: 100vh; /* Set card container height to fill the viewport */
+  background-color: #ffffff; /* Light gray background color */
 }
 
-/* Styles for the left column */
-.left-column {
-  width: 30%;
-}
-
-/* Styles for the card within the left column */
-.card-left {
+/* Styles for the card */
+.card {
+  width: 80%; /* Set card width */
+  max-width: 600px; /* Limit maximum card width */
   padding: 1rem;
+  box-shadow: 0 10px 8px rgba(255, 255, 255, 0.1); /* Add box shadow for depth */
+  border-radius: 8px; /* Add border radius for rounded corners */
+  background-color:#DFCFBE; /* White background color */
+  margin: 0 auto; 
+  margin-bottom: 20px;/* Center the card horizontally */
 }
+
 
 /* Styles for the buttons group */
 .btn-group {
   display: flex;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+ 
+  background-color: transparent; /* White background color */
 }
 
 /* Styles for the inputs */
 .form-control {
   width: 100%;
   margin-top: 0.5rem;
+  border-radius: 8px;
+  color:white;
+  margin-bottom: 20px;
+  background-color: #000000; /* White background color */
 }
 
 /* Styles for the passenger count section */
@@ -37,25 +53,26 @@
   display: flex;
   justify-content: center;
   margin-top: 0.5rem;
+  background-color: #ffffff; /* White background color */
 }
 
 /* Styles for the search button */
 .search-btn {
   width: 100%;
   margin-top: 1rem;
-}
-
-/* Styles for the right column */
-.right-column {
-  width: 68%;
+  background-color: #ffffff; /* Blue background color */
+  color: #ffffff; /* White text color */
 }
 
 /* Styles for the refine flight search section */
 .refine-search {
   margin-top: 1rem;
+  background-color: #ffffff; /* White background color */
 }
 
 /* Styles for the InputRange component */
 .input-range-container {
   margin-top: 1rem;
+  background-color: #ffffff;
+/* White background color */
 }

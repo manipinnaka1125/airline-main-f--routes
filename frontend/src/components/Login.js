@@ -14,7 +14,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -44,13 +45,23 @@ export default function Login({store}) {
     axios.post('http://localhost:8081/check',{
       un:data.get('un'),
       pw: data.get('pw'),
-    }).then((Response)=>{
-        console.log(Response.data);
-        if(Response.data!=="fail"){
-            store.dispatch({"type":"login","data":{"un":Response.data.name,"role":Response.data.role}})
-        }
     })
-    navigate('/Home')
+    .then((Response)=>{
+        console.log(Response.data);
+        // Inside the Login component after successful login
+if (Response.data !== "fail") {
+  toast.success("Login Successful");
+  setTimeout(() => {
+    navigate('/PassengerHome', { state: { username: Response.data.name } }); // Pass the username in state
+  }, 1000);
+} else {
+  toast.error("Invalid Login");
+}
+
+
+        
+    })
+    
   };
 
   return (
@@ -123,6 +134,7 @@ export default function Login({store}) {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
+      <ToastContainer/>
     </ThemeProvider>
   );
 }

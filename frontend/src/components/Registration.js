@@ -218,6 +218,7 @@ function Registration() {
               disabled={Object.keys(formErrors).length !== 0}
             >
               Sign Up
+              
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
