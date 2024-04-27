@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cors(
   {
-    origin:["https://airline-main-f-routes-cr8m.vercel.app/"],
+    origin:["https://airline-main-f-routes-cr8m.vercel.app"],
     methods:["POST","GET"],
     credentials: true
   }
