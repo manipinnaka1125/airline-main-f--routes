@@ -11,7 +11,7 @@ const BookingsData = () => {
 
   const fetchPassengerDetails = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/retrieve/passengerdetails');
+      const response = await axios.get('https://airline-main-f-routes-api.vercel.app/retrieve/passengerdetails');
       setPassengerDetails(response.data);
       console.log('Passenger details:', response.data);
     } catch (error) {
