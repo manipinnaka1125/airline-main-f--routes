@@ -126,7 +126,7 @@ function Search() {
       returnFilterData
     };
 
-    axios.post('http://localhost:8081/post-endpoint', postData)
+    axios.post('https://airline-main-f-routes-api.vercel.app/post-endpoint', postData)
       .catch(error => {
         console.error('Error posting data to server:', error);
       });
