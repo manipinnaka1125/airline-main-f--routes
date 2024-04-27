@@ -7,7 +7,7 @@ function Ticket() {
 
   useEffect(() => {
     // Fetch passenger details from the server
-    axios.get('http://localhost:8081/retrieve/passengerdetails')
+    axios.get('https://airline-main-f-routes-api.vercel.app/retrieve/passengerdetails')
       .then(response => {
         console.log('Response from server:', response.data); // Log the response data
         // Set the latest passenger details
