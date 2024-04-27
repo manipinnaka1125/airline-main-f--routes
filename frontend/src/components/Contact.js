@@ -17,7 +17,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8081/contact', formData);
+      const response = await axios.post('https://airline-main-f-routes-api.vercel.app/contact', formData);
       if (response.status === 200) {
         console.log('Form data submitted:', formData);
         setFormData({
