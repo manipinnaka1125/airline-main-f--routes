@@ -7,7 +7,13 @@ require('dotenv').config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+  {
+    origin:["https://airline-main-f-routes.vercel.app/"],
+    methods:["POST","GET"],
+    credentials: true
+  }
+));
 
 
 const Client = new MongoClient('mongodb+srv://admin1:admin1@cluster0.wyowjiq.mongodb.net/?retryWrites=true&w=majority');
