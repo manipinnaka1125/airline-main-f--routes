@@ -22,7 +22,7 @@ function PassengerForm({ onSubmit }) {
     e.preventDefault();
     try {
       // Send POST request to server
-      await axios.post('http://localhost:8081/passenger-form', passengerInfo); // Update URL if needed
+      await axios.post('https://airline-main-f-routes-api.vercel.app/passenger-form', passengerInfo); // Update URL if needed
       onSubmit(passengerInfo);
       // Redirect to payment gateway after submitting with passenger details as query parameters
       const queryString = new URLSearchParams(passengerInfo).toString();
