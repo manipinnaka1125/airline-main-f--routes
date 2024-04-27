@@ -27,7 +27,7 @@ const passengerDetailsCol = db.collection('passengerdetails');
 // Nodemailer configuration
 // Nodemailer configuration
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // Update with your email service provider
+  service: 'pinnakamaniswaroop@gmail.com', // Update with your email service provider
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD,
