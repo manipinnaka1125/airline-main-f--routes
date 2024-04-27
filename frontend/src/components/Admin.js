@@ -7,7 +7,7 @@ const Admin = () => {
   const [formData, setFormData] = useState({ name: '', role: '', email: '', password: '' }); // Add formData state
 
   const fetchData = async () => {
-    await axios.get('http://localhost:8081/retrive')
+    await axios.get('https://airline-main-f-routes-api.vercel.app/retrive')
       .then(response => {
         setRes(response.data);
         console.log(response.data);
@@ -19,12 +19,12 @@ const Admin = () => {
 
   const updateData = async (id) => {
     console.log(id);
-    const res = await axios.put(`http://localhost:8081/users/${id}`, formData); // Use formData here
+    const res = await axios.put(`https://airline-main-f-routes-api.vercel.app/users/${id}`, formData); // Use formData here
     fetchData();
     console.log(res.data);
   };
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:8081/users/${id}`)
+    await axios.delete(`https://airline-main-f-routes-api.vercel.app/users/${id}`)
       .then(response => {
         console.log(response.data);
       });
