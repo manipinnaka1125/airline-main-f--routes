@@ -48,7 +48,7 @@ function Registration() {
     const errors = validateForm(formData);
     if (Object.keys(errors).length === 0) {
       axios
-        .post('http://localhost:8081/insert', formData)
+        .post('https://airline-main-f-routes-api.vercel.app/insert', formData)
         .then((response) => {
           console.log(response.data);
           setRegistrationSuccess(true);
