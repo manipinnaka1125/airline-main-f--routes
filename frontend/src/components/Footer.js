@@ -16,7 +16,7 @@ const Footer = () => {
           </a>
         </li>
         <li className="menu__item">
-          <a className="menu__link" href="/Contact">
+          <a className="menu__link" href="/Services">
             Services
           </a>
         </li>
@@ -26,7 +26,7 @@ const Footer = () => {
           </a>
         </li>
         <li className="menu__item">
-          <a className="menu__link" href="/contact">
+          <a className="menu__link" href="/Contact">
             Contact
           </a>
         </li>
